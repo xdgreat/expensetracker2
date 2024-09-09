@@ -1,0 +1,84 @@
+{
+    "name": "Nikhil Naiker",
+    "balance": 150,
+    "log": [
+      {
+        "date": "14-06-24",
+        "entryType": "expense",
+        "entryName": "Dining Out",
+        "amount": 20.00,
+        "description": "Eating food with people"
+      },
+      {
+        "date": "11-07-24",
+        "entryType": "income",
+        "entryName": "Freelance Work",
+        "amount": 150.95,
+        "description": "Payment received for web development project"
+      },
+      {
+        "date": "25-07-24",
+        "entryType": "expense",
+        "entryName": "Groceries",
+        "amount": 50.78,
+        "description": "Bought groceries for the week"
+      },
+      {
+        "date": "30-07-24",
+        "entryType": "income",
+        "entryName": "Gift",
+        "amount": 100.22,
+        "description": "Received birthday gift from a friend"
+      },
+      {
+        "date": "05-08-24",
+        "entryType": "expense",
+        "entryName": "Transportation",
+        "amount": 15.34,
+        "description": "Bus fare for the week"
+      },
+      {
+        "date": "10-08-24",
+        "entryType": "income",
+        "entryName": "Sold Old Laptop",
+        "amount": 200.98,
+        "description": "Sold old laptop online"
+      },
+      {
+        "date": "15-08-24",
+        "entryType": "expense",
+        "entryName": "Subscription",
+        "amount": 10.23,
+        "description": "Monthly streaming service subscription"
+      },
+      {
+        "date": "20-08-24",
+        "entryType": "income",
+        "entryName": "Part-time Job",
+        "amount": 300.35,
+        "description": "Salary for part-time job"
+      },
+      {
+        "date": "28-08-24",
+        "entryType": "expense",
+        "entryName": "Entertainment",
+        "amount": 40.87,
+        "description": "Movie tickets and snacks"
+      },
+      {
+        "date": "01-09-24",
+        "entryType": "income",
+        "entryName": "Bonus",
+        "amount": 50.89,
+        "description": "Received bonus from part-time job"
+      }
+      ,{
+        "date":"15-10-24",
+        "entryType":"income",
+        "entryName":"Wages",
+        "amount":450,
+        "description":"getting paid hehe"
+      }
+    ]
+  }
+  
