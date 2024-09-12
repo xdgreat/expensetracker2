@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 export async function POST(request: NextRequest) {
   try {
     const req = await request.json();
-    const { name, amount, date, description } = req;
+    const { name, amount, date, description, type } = req;
 
     const data: FinancialData = await getData();
 
@@ -14,7 +14,7 @@ export async function POST(request: NextRequest) {
       amount: Number.parseInt(amount),
       date,
       description,
-      entryType: "income",
+      entryType: type,
     };
 
     data.log.push(requestData);

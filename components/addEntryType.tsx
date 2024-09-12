@@ -22,13 +22,20 @@ import {
 } from "@/components/ui/popover";
 import { useEffect, useState } from "react";
 
-export default function AddIncome() {
+export default function AddEntryType({
+  type,
+  title,
+}: {
+  type: "income" | "expense";
+  title: string;
+}) {
   const [date, setDate] = useState<Date>(new Date());
   const [postRequest, setPostRequest] = useState({
     name: "",
     amount: 0,
     date: "",
     description: "",
+    type: type,
   });
 
   const handleChange = (e: any, idName: string) => {
@@ -46,7 +53,7 @@ export default function AddIncome() {
 
   const handleSubmit = async () => {
     console.log(postRequest);
-    const response = await fetch("/api/addIncome", {
+    const response = await fetch("/api/addFinancialEntry", {
       method: "POST",
       body: JSON.stringify(postRequest),
     });
@@ -61,13 +68,13 @@ export default function AddIncome() {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="default">Add Income</Button>
+          <Button variant="default">{title}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Add Income</DialogTitle>
+            <DialogTitle>{title}</DialogTitle>
             <DialogDescription>
-              Add your income entry with the description. Click save changes
+              Add your {type} entry with the description. Click save changes
               when you're done.
             </DialogDescription>
           </DialogHeader>

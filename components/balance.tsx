@@ -13,6 +13,9 @@ import {
 } from "./ui/table";
 import { Table } from "./ui/table";
 import AddIncome from "./addIncome";
+import AddEntryType from "./addEntryType";
+import { DataTable } from "./tables/table-data";
+import { columns } from "./tables/columns";
 
 export default function Balance() {
   const [incomeExpense, getIncomeExpense] = useState<{
@@ -42,50 +45,17 @@ export default function Balance() {
   }, []);
 
   return (
-    <span>
-      <h1>Name: {data.name}</h1>
-      <h2>Balance: ${data.balance}</h2>
-      <AddIncome />
-      <Table>
-        <TableCaption>A list of your recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Date</TableHead>
-            <TableHead>Name</TableHead>
-            <TableHead>Description</TableHead>
-            {/* <TableHead>Entry Type</TableHead> */}
-            <TableHead>Cost</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {data.log.map((invoice) => (
-            <TableRow
-              key={invoice.entryName}
-              style={{
-                background:
-                  invoice.entryType === "income"
-                    ? "rgba(98, 247, 87, 0.8)"
-                    : "rgba(204, 0, 0, 0.5)",
-              }}>
-              <TableCell className="font-medium">{invoice.date}</TableCell>
-              <TableCell className="font-medium">{invoice.entryName}</TableCell>
-              <TableCell>{invoice.description}</TableCell>
-              {/* <TableCell>{invoice.entryType}</TableCell> */}
-              <TableCell className="font-medium">${invoice.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell>
-              Income: ${incomeExpense.totalIncome}
-              <br />
-              Expense: ${incomeExpense.totalExpense}
-            </TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </span>
+    <>
+      <div className="max-w-5xl mx-auto">
+        <h1 className="">Name: {data.name}</h1>
+        <h2>Balance: ${data.balance}</h2>
+        <div className="fixed bottom-2 z-[1000]">
+          <AddEntryType title="Add Income" type="income" />
+        </div>
+        <AddEntryType title="Add Expense" type="expense" />
+      </div>
+
+      <DataTable columns={columns} data={data.log} />
+    </>
   );
 }

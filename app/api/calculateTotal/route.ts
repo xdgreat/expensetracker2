@@ -13,6 +13,8 @@ export async function GET() {
     { totalExpense: 0, totalIncome: 0 }
   );
 
+  const balance = totalIncome - totalExpense;
+
   return NextResponse.json({
     totalExpense: Math.round(totalExpense * 100) / 100,
     totalIncome: Math.round(totalIncome * 100) / 100,
