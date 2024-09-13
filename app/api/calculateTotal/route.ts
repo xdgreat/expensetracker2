@@ -6,8 +6,8 @@ export async function GET() {
 
   const { totalExpense, totalIncome } = logs.reduce(
     (acc, { entryType, amount }) => {
-      if (entryType === "expense") acc.totalExpense += amount;
-      if (entryType === "income") acc.totalIncome += amount;
+      if (entryType === "expense") (acc.totalExpense += amount).toFixed(2);
+      if (entryType === "income") (acc.totalIncome += amount).toFixed(2);
       return acc;
     },
     { totalExpense: 0, totalIncome: 0 }
@@ -15,8 +15,10 @@ export async function GET() {
 
   const balance = totalIncome - totalExpense;
 
+  console.log(totalIncome, totalExpense, balance);
   return NextResponse.json({
     totalExpense: Math.round(totalExpense * 100) / 100,
     totalIncome: Math.round(totalIncome * 100) / 100,
+    balance: Math.round(balance * 100) / 100,
   });
 }

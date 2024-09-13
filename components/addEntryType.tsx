@@ -23,20 +23,32 @@ import {
 import { useEffect, useState } from "react";
 
 export default function AddEntryType({
+  className,
   type,
   title,
+  callback,
 }: {
+  className: string;
   type: "income" | "expense";
   title: string;
+  callback: Function;
 }) {
   const [date, setDate] = useState<Date>(new Date());
+  const [submitData, setSubmitData] = useState({
+    success: false,
+    message: "",
+    status: 0,
+    processing: false,
+  });
   const [postRequest, setPostRequest] = useState({
     name: "",
-    amount: 0,
+    amount: 0.0,
     date: "",
     description: "",
     type: type,
   });
+
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
   const handleChange = (e: any, idName: string) => {
     idName = idName ? idName : e.target.id;
@@ -52,7 +64,7 @@ export default function AddEntryType({
   };
 
   const handleSubmit = async () => {
-    console.log(postRequest);
+    setSubmitData({ ...submitData, processing: true });
     const response = await fetch("/api/addFinancialEntry", {
       method: "POST",
       body: JSON.stringify(postRequest),
@@ -60,15 +72,31 @@ export default function AddEntryType({
 
     if (response.status != 200) {
       console.log("ERROR: Wtf happened bruh");
+      setSubmitData({
+        processing: false,
+        message: "ERROR: Something went wrong.",
+        status: 500,
+        success: false,
+      });
     }
+
+    callback();
+    setSubmitData({
+      processing: false,
+      message: "Success: Entry added successfully.",
+      status: 200,
+      success: true,
+    });
+
     const data = await response.json();
-    console.log(data);
   };
   return (
     <>
-      <Dialog>
+      <Dialog open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
         <DialogTrigger asChild>
-          <Button variant="default">{title}</Button>
+          <Button variant="default" className={className}>
+            {title}
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
@@ -148,9 +176,24 @@ export default function AddEntryType({
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" onClick={handleSubmit}>
-              Save changes
-            </Button>
+            <p
+              className={
+                submitData.status === 200
+                  ? `text-green-500`
+                  : `text-red-500` + `ml-0 mr-auto text-xs`
+              }
+            >
+              {submitData.message}
+            </p>
+            <DialogTrigger>
+              <Button
+                type="submit"
+                onClick={handleSubmit}
+                disabled={submitData.processing}
+              >
+                Save changes
+              </Button>
+            </DialogTrigger>
           </DialogFooter>
         </DialogContent>
       </Dialog>

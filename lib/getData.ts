@@ -1,6 +1,7 @@
 import { promises as fs } from "node:fs";
 
 export type FinancialEntry = {
+  id: number;
   date: string;
   entryType: "income" | "expense";
   entryName: string;
@@ -10,7 +11,6 @@ export type FinancialEntry = {
 
 export type FinancialData = {
   name: string;
-  balance: number;
   log: FinancialEntry[];
 };
 

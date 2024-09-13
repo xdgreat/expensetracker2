@@ -14,18 +14,22 @@ import { Button } from "../ui/button";
 import { MoreHorizontal } from "lucide-react";
 
 export const columns: ColumnDef<FinancialEntry>[] = [
-  {
-    accessorKey: "entryType",
-    header: "Entry Type",
-  },
+//   {
+//     accessorKey: "entryType",
+//     header: "Entry Type",
+//   }
+{
+    accessorKey:"id",
+    header:"ID"
+},
   {
     accessorKey: "entryName",
     header: "Entry Name",
   },
-  {
-    accessorKey: "description",
-    header: "Entry Description",
-  },
+  //   {
+  //     accessorKey: "description",
+  //     header: "Entry Description",
+  //   },
   {
     accessorKey: "date",
     header: "Date",

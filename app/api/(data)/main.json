@@ -1,85 +1,8 @@
 {
   "name": "Nikhil Naiker",
-  "balance": 150,
   "log": [
     {
-      "date": "14-06-24",
-      "entryType": "expense",
-      "entryName": "Dining Out",
-      "amount": 20,
-      "description": "Eating food with people"
-    },
-    {
-      "date": "11-07-24",
-      "entryType": "income",
-      "entryName": "Freelance Work",
-      "amount": 150.95,
-      "description": "Payment received for web development project"
-    },
-    {
-      "date": "25-07-24",
-      "entryType": "expense",
-      "entryName": "Groceries",
-      "amount": 50.78,
-      "description": "Bought groceries for the week"
-    },
-    {
-      "date": "30-07-24",
-      "entryType": "income",
-      "entryName": "Gift",
-      "amount": 100.22,
-      "description": "Received birthday gift from a friend"
-    },
-    {
-      "date": "05-08-24",
-      "entryType": "expense",
-      "entryName": "Transportation",
-      "amount": 15.34,
-      "description": "Bus fare for the week"
-    },
-    {
-      "date": "10-08-24",
-      "entryType": "income",
-      "entryName": "Sold Old Laptop",
-      "amount": 200.98,
-      "description": "Sold old laptop online"
-    },
-    {
-      "date": "15-08-24",
-      "entryType": "expense",
-      "entryName": "Subscription",
-      "amount": 10.23,
-      "description": "Monthly streaming service subscription"
-    },
-    {
-      "date": "20-08-24",
-      "entryType": "income",
-      "entryName": "Part-time Job",
-      "amount": 300.35,
-      "description": "Salary for part-time job"
-    },
-    {
-      "date": "28-08-24",
-      "entryType": "expense",
-      "entryName": "Entertainment",
-      "amount": 40.87,
-      "description": "Movie tickets and snacks"
-    },
-    {
-      "date": "01-09-24",
-      "entryType": "income",
-      "entryName": "Bonus",
-      "amount": 50.89,
-      "description": "Received bonus from part-time job"
-    },
-    {
-      "date": "15-10-24",
-      "entryType": "income",
-      "entryName": "Wages",
-      "amount": 450,
-      "description": "getting paid hehe"
-    },
-    {
+      "id": 1,
       "entryName": "testing",
       "amount": 2,
       "date": "21/09/2024",
@@ -87,6 +10,7 @@
       "entryType": "income"
     },
     {
+      "id": 2,
       "entryName": "testing income entry",
       "amount": 5,
       "date": "21/09/2024",
@@ -94,10 +18,155 @@
       "entryType": "income"
     },
     {
+      "id": 3,
       "entryName": "expense ",
       "amount": 3,
       "date": "14/09/2024",
       "description": "expense expense money out aww",
+      "entryType": "expense"
+    },
+    {
+      "id": 4,
+      "entryName": "d",
+      "amount": 1000,
+      "date": "28/09/2024",
+      "description": "testu",
+      "entryType": "expense"
+    },
+    {
+      "id": 5,
+      "entryName": "",
+      "amount": 0,
+      "date": "",
+      "description": "",
+      "entryType": "income"
+    },
+    {
+      "id": 6,
+      "entryName": "testing again",
+      "amount": 8,
+      "date": "",
+      "description": "tesing",
+      "entryType": "income"
+    },
+    {
+      "id": 7,
+      "entryName": "testing this",
+      "amount": 7,
+      "date": "24/09/2024",
+      "description": "fg",
+      "entryType": "income"
+    },
+    {
+      "id": 8,
+      "entryName": "test",
+      "amount": 5,
+      "date": "21/09/2024",
+      "description": "sd",
+      "entryType": "income"
+    },
+    {
+      "id": 9,
+      "entryName": "sa",
+      "amount": 8,
+      "date": "26/09/2024",
+      "description": "sxsx",
+      "entryType": "expense"
+    },
+    {
+      "id": 10,
+      "entryName": "karthick",
+      "amount": 100,
+      "date": "14/09/2024",
+      "description": "drinking him",
+      "entryType": "income"
+    },
+    {
+      "id": 11,
+      "entryName": "kathick expensive",
+      "amount": 9,
+      "date": "21/09/2024",
+      "description": "ss",
+      "entryType": "expense"
+    },
+    {
+      "id": 12,
+      "entryName": "Hookers",
+      "amount": 5,
+      "date": "",
+      "description": "",
+      "entryType": "expense"
+    },
+    {
+      "id": 13,
+      "entryName": "Selling butt",
+      "amount": 89000,
+      "date": "",
+      "description": "",
+      "entryType": "income"
+    },
+    {
+      "id": 14,
+      "entryName": "tesing",
+      "amount": 5,
+      "date": "",
+      "description": "haha lol",
+      "entryType": "income"
+    },
+    {
+      "id": 15,
+      "entryName": "asdas",
+      "amount": 34,
+      "date": "27/09/2024",
+      "description": "sfsd",
+      "entryType": "income"
+    },
+    {
+      "id": 16,
+      "entryName": "Garry last night",
+      "amount": 0,
+      "date": "",
+      "description": "",
+      "entryType": "income"
+    },
+    {
+      "id": 17,
+      "entryName": "Rent",
+      "amount": 1,
+      "date": "",
+      "description": "",
+      "entryType": "expense"
+    },
+    {
+      "id": 18,
+      "entryName": "Selling Kartik on rewa st",
+      "amount": 10.99,
+      "date": "",
+      "description": "",
+      "entryType": "income"
+    },
+    {
+      "id": 19,
+      "entryName": "testing income",
+      "amount": 6.87,
+      "date": "",
+      "description": "adsa",
+      "entryType": "income"
+    },
+    {
+      "id": 20,
+      "entryName": "Bought new job at oceanic communications in garden city raiwai ",
+      "amount": 500,
+      "date": "",
+      "description": "",
+      "entryType": "expense"
+    },
+    {
+      "id": 21,
+      "entryName": "Badoosi ",
+      "amount": 0.5,
+      "date": "25/9/2024",
+      "description": "Heartbreak ",
       "entryType": "expense"
     }
   ]

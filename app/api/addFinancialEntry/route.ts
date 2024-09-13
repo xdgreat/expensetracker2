@@ -8,10 +8,12 @@ export async function POST(request: NextRequest) {
     const { name, amount, date, description, type } = req;
 
     const data: FinancialData = await getData();
+    const id = data.log.length + 1;
 
     const requestData: FinancialEntry = {
+      id,
       entryName: name,
-      amount: Number.parseInt(amount),
+      amount: parseFloat(amount),
       date,
       description,
       entryType: type,

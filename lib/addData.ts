@@ -10,7 +10,6 @@ export type FinancialEntry = {
 
 export type FinancialData = {
   name: string;
-  balance: number;
   log: FinancialEntry[];
 };
 

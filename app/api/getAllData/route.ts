@@ -11,8 +11,6 @@ export async function GET() {
   try {
     const data = await getData();
     const response = data;
-    Math.round(data.balance * 100) / 100;
-
     return NextResponse.json(response);
   } catch (error) {
     const response = {

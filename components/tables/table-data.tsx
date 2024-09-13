@@ -17,16 +17,17 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "../ui/button";
+import AddEntryType from "../addEntryType";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
-  data: TData[];
+  data: any;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: DataTableProps<any, TValue>) {
   const table = useReactTable({
     data,
     columns,
@@ -35,7 +36,7 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-3xl mx-auto px-4 py-2">
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -64,7 +65,14 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={
+                        row.original.entryType === "income"
+                          ? "testingClass"
+                          : "testingClass2"
+                      }
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
