@@ -154,7 +154,7 @@ export default function AddEntryType({
             <DialogTitle>{title}</DialogTitle>
             <DialogDescription>
               Add your {type} entry with the description. Click save changes
-              when you're done.
+              when you are done.
             </DialogDescription>
           </DialogHeader>
 
