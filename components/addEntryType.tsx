@@ -20,7 +20,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function AddEntryType({
   className,
@@ -49,8 +49,17 @@ export default function AddEntryType({
   });
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [errors, setErrors] = useState({
+    name: "",
+    amount: "",
+    date: "",
+  });
 
   const handleChange = (e: any, idName: string) => {
+    if (!e) { // to avoid error when no date is selected (pressing the same date twice)
+      return;
+    }
     idName = idName ? idName : e.target.id;
     if (idName === "date") {
       setDate(e);
@@ -63,7 +72,32 @@ export default function AddEntryType({
     }
   };
 
+  const validateForm = () => {
+    const newErrors = { name: "", amount: "", date: "" };
+    let isValid = true;
+
+    if (!postRequest.name) {
+      newErrors.name = "Name is required.";
+      isValid = false;
+    }
+    if (!postRequest.amount || postRequest.amount <= 0) {
+      newErrors.amount = "Amount must be greater than 0.";
+      isValid = false;
+    }
+    if (!postRequest.date) {
+      newErrors.date = "Date is required.";
+      isValid = false;
+    }
+
+    setErrors(newErrors);
+    return isValid;
+  };
+
   const handleSubmit = async () => {
+    if (!validateForm()) {
+      return;
+    }
+
     setSubmitData({ ...submitData, processing: true });
     const response = await fetch("/api/addFinancialEntry", {
       method: "POST",
@@ -78,23 +112,40 @@ export default function AddEntryType({
         status: 500,
         success: false,
       });
+    } else {
+      setSubmitData({
+        processing: false,
+        message: "Success: Entry added successfully.",
+        status: 200,
+        success: true,
+      });
+
+      setPostRequest({
+        name: "",
+        amount: 0.0,
+        date: "",
+        description: "",
+        type: type,
+      });
+
+      const data = await response.json();
+      callback();
+      setIsDialogOpen(false);
     }
-
-    callback();
-    setSubmitData({
-      processing: false,
-      message: "Success: Entry added successfully.",
-      status: 200,
-      success: true,
-    });
-
-    const data = await response.json();
   };
+
+  const handleAmountInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    if (/^\d*\.?\d*$/.test(value)) {
+      handleChange(e, "amount");
+    }
+  };
+
   return (
     <>
-      <Dialog open={isPopoverOpen} onOpenChange={setIsPopoverOpen}>
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogTrigger asChild>
-          <Button variant="default" className={className}>
+          <Button variant="default" color="#d4d4d4" className={className}>
             {title}
           </Button>
         </DialogTrigger>
@@ -116,9 +167,13 @@ export default function AddEntryType({
                 id="name"
                 placeholder="Food"
                 className="col-span-3"
+                value={postRequest.name}
                 onChange={(e) => handleChange(e, e.target.id)}
                 required
               />
+              {errors.name && (
+                <p className="col-span-4 text-red-500 text-xs">{errors.name}</p>
+              )}
             </div>
 
             <div className="grid grid-cols-4 items-center gap-4">
@@ -129,9 +184,15 @@ export default function AddEntryType({
                 id="amount"
                 placeholder="9.99"
                 className="col-span-3"
-                onChange={(e) => handleChange(e, e.target.id)}
+                value={postRequest.amount === 0.0 ? "" : postRequest.amount}
+                onChange={handleAmountInput}
                 required
               />
+              {errors.amount && (
+                <p className="col-span-4 text-red-500 text-xs">
+                  {errors.amount}
+                </p>
+              )}
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="Date" className="text-right">
@@ -144,8 +205,7 @@ export default function AddEntryType({
                     className={cn(
                       "w-[280px] justify-start text-left font-normal",
                       !date && "text-muted-foreground"
-                    )}
-                  >
+                    )}>
                     <CalendarIcon className="mr-2 h-4 w-4" />
                     {date ? format(date, "PPP") : <span>Pick a date</span>}
                   </Button>
@@ -161,6 +221,9 @@ export default function AddEntryType({
                   />
                 </PopoverContent>
               </Popover>
+              {errors.date && (
+                <p className="col-span-4 text-red-500 text-xs">{errors.date}</p>
+              )}
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="Description" className="text-right">
@@ -170,8 +233,8 @@ export default function AddEntryType({
                 id="description"
                 placeholder="Dining out"
                 className="col-span-3"
+                value={postRequest.description}
                 onChange={(e) => handleChange(e, e.target.id)}
-                required
               />
             </div>
           </div>
@@ -181,19 +244,13 @@ export default function AddEntryType({
                 submitData.status === 200
                   ? `text-green-500`
                   : `text-red-500` + `ml-0 mr-auto text-xs`
-              }
-            >
-              {submitData.message}
-            </p>
-            <DialogTrigger>
-              <Button
-                type="submit"
-                onClick={handleSubmit}
-                disabled={submitData.processing}
-              >
-                Save changes
-              </Button>
-            </DialogTrigger>
+              }></p>
+            <Button
+              type="submit"
+              onClick={handleSubmit}
+              disabled={submitData.processing}>
+              Save changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

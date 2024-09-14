@@ -1,7 +1,7 @@
 "use client";
 
-import { TrendingUp } from "lucide-react";
-import { Pie, PieChart } from "recharts";
+import { TrendingDown, TrendingUp } from "lucide-react";
+import { Pie, PieChart, Cell, LabelList } from "recharts";
 
 import {
   Card,
@@ -50,28 +50,64 @@ export function IncomeExpensePieChart({
       color: "var(--color-expense)",
     },
   } satisfies ChartConfig;
+
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col ">
       <CardHeader className="items-center pb-0">
         <CardTitle>Hi, {name}</CardTitle>
-        <CardDescription>Expense & Income </CardDescription>
+        <CardDescription>Expense & Income</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-h-[250px] pb-0 [&_.recharts-pie-label-text]:fill-foreground"
-        >
-          <PieChart>
+          className="mx-auto aspect-square max-h-[200px] pb-0">
+          <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
             <ChartTooltip content={<ChartTooltipContent hideLabel />} />
-            <Pie data={chartData} dataKey="amount" label nameKey="entryType" />
+            <Pie
+              data={chartData}
+              dataKey="amount"
+              nameKey="entryType"
+              label={({
+                cx,
+                cy,
+                midAngle,
+                innerRadius,
+                outerRadius,
+                value,
+              }) => {
+                const RADIAN = Math.PI / 180;
+                const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+                const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                const y = cy + radius * Math.sin(-midAngle * RADIAN);
+                return (
+                  <text
+                    x={x}
+                    y={y}
+                    fill="#F5F5F5"
+                    textAnchor={x > cx ? "start" : "end"}
+                    dominantBaseline="central"
+                    fontSize={12}>
+                    ${value}
+                  </text>
+                );
+              }}>
+              {chartData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={entry.fill} />
+              ))}
+            </Pie>
           </PieChart>
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Balance: ${incomeAmount - expenseAmount}
-          <TrendingUp className="h-4 w-4" />
+          Balance: ${(incomeAmount - expenseAmount).toFixed(2)}
+          {incomeAmount - expenseAmount >= 0 ? (
+            <TrendingUp className="h-4 w-4 text-green-500" />
+          ) : (
+            <TrendingDown className="h-4 w-4 text-red-500" />
+          )}
         </div>
+
         <div className="leading-none text-muted-foreground">
           Showing total income and expense of all time
         </div>

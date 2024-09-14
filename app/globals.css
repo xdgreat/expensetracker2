@@ -89,8 +89,7 @@
   }
 }
 
-
-.testingClass>div::before {
+.testingClass > div::before {
   content: url("/arrowup.svg");
   position: absolute;
   right: -3em;
@@ -99,12 +98,11 @@
   display: block;
 }
 
-.testingClass>div {
+.testingClass > div {
   position: relative;
 }
 
-
-.testingClass2>div::before {
+.testingClass2 > div::before {
   content: url("/arrowdown.svg");
   position: absolute;
   right: -3em;
@@ -113,14 +111,19 @@
   display: block;
 }
 
-.testingClass2>div {
+.testingClass2 > div {
   position: relative;
 }
 
 tspan {
   z-index: 9999;
 }
-
-.rechart-surface {
+/* 
+.recharts-surface {
   width: 300px !important;
+  height: 300px !important;
+} */
+
+html {
+  overflow: hidden;
 }

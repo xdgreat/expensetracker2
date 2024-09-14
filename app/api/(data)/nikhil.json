@@ -1,0 +1,29 @@
+{
+    "name": "Nikhil Naiker",
+    "log": [
+      {
+        "id": 1,
+        "entryName": "Wages ",
+        "amount": 239.2,
+        "date": "8/30/2024",
+        "description": "",
+        "entryType": "income"
+      },
+      {
+        "id": 2,
+        "entryName": "Wages",
+        "amount": 358.8,
+        "date": "9/13/2024",
+        "description": "",
+        "entryType": "income"
+      },
+      {
+        "id": 3,
+        "entryName": "Cash",
+        "amount": 20,
+        "date": "9/13/2024",
+        "description": "Amount of cash in my wallet ",
+        "entryType": "income"
+      }
+    ]
+  }

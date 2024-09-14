@@ -28,32 +28,35 @@ export default function Balance() {
         getData(data);
         console.log(data);
       });
-  }
-  useEffect(() => {
-    getAllData();
-    console.log(data);
 
     fetch("/api/calculateTotal", {
       method: "GET",
     })
       .then((res) => res.json())
       .then((data) => getIncomeExpense(data));
+  }
+  useEffect(() => {
+    getAllData();
+    console.log(data);
 
     console.log(incomeExpense);
   }, []);
 
   return (
     <>
-      <div className="max-w-5xl mx-auto border bg-green-500">
-        <IncomeExpensePieChart
-          name={data.name}
-          expenseAmount={incomeExpense.totalExpense}
-          incomeAmount={incomeExpense.totalIncome}
-          callback={getAllData}
-        />
+      <div className="max-w-5xl mx-auto flex flex-col items-center h-[100dvh] justify-start">
+        <div className="w-full">
+          <IncomeExpensePieChart
+            name={data.name}
+            expenseAmount={incomeExpense.totalExpense}
+            incomeAmount={incomeExpense.totalIncome}
+            callback={getAllData}
+          />
+        </div>
+        <div className="w-[92%] overflow-x-auto">
+          <DataTable columns={columns} data={data.log} />
+        </div>
       </div>
-
-      <DataTable columns={columns} data={data.log} />
     </>
   );
 }

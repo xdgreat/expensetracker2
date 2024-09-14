@@ -5,9 +5,11 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  getSortedRowModel,
   useReactTable,
+  SortingState,
 } from "@tanstack/react-table";
-
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -28,11 +30,18 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<any, TValue>) {
+  const [sorting, setSorting] = useState<SortingState>([]); // state for sorting
+
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+    },
+    onSortingChange: setSorting, // pass the setSorting function
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
@@ -42,18 +51,30 @@ export function DataTable<TData, TValue>({
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead key={header.id}>
+                    {header.isPlaceholder
+                      ? null
+                      : flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                    <button
+                      onClick={() => {
+                        const isAscending = table.getState().sorting.find(
+                          (s) => s.id === header.id
+                        )?.desc === false;
+                        table.setSorting([{ id: header.id, desc: !isAscending }]);
+                      }}
+                      className="ml-2 text-sm"
+                    >
+                      {table.getState().sorting.find((s) => s.id === header.id)
+                        ?.desc
+                        ? "▲"
+                        : "▼"}
+                    </button>
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>

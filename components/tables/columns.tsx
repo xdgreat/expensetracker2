@@ -1,5 +1,3 @@
-"use client";
-
 import { FinancialEntry } from "@/lib/addData";
 import { ColumnDef } from "@tanstack/react-table";
 import {
@@ -14,37 +12,37 @@ import { Button } from "../ui/button";
 import { MoreHorizontal } from "lucide-react";
 
 export const columns: ColumnDef<FinancialEntry>[] = [
-//   {
-//     accessorKey: "entryType",
-//     header: "Entry Type",
-//   }
-{
-    accessorKey:"id",
-    header:"ID"
-},
+  {
+    accessorKey: "id",
+    header: "ID",
+    enableSorting: true,
+    sortingFn: 'alphanumeric', // default sorting function for numeric and alphanumeric
+  },
   {
     accessorKey: "entryName",
     header: "Entry Name",
   },
-  //   {
-  //     accessorKey: "description",
-  //     header: "Entry Description",
-  //   },
   {
     accessorKey: "date",
     header: "Date",
+    enableSorting: true,
+    sortingFn: 'datetime', // ensure proper date sorting
   },
   {
     accessorKey: "amount",
     header: () => <div className="text-right">Amount</div>,
+    enableSorting: true,
     cell: ({ row }) => {
       const amount = parseFloat(row.getValue("amount"));
       const formatted = new Intl.NumberFormat("en-US", {
         style: "currency",
         currency: "FJD",
+        unitDisplay: "long",
+        currencyDisplay: "narrowSymbol",
       }).format(amount);
       return <div className="text-right font-medium">{formatted}</div>;
     },
+    sortingFn: 'basic', // default sorting function for numeric values
   },
   {
     id: "actions",
