@@ -14,7 +14,7 @@ export type FinancialData = {
 };
 
 export default async function addData(data: FinancialData) {
-  const path = process.cwd() + "/app/api/(data)/main.json";
+  const path = process.cwd() + "/app/main.json";
   fs.writeFile(path, JSON.stringify(data, null, 2));
 
   const file = await fs.readFile(path, "utf8");
